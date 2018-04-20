@@ -6,4 +6,9 @@ package com.lamra.smd.lamra;
 
 public class User {
     int id;
+<<<<<<< HEAD
+=======
+    String name;
+    
+>>>>>>> 82f52f936ab1769067d436195ada2c25df68d0d3
 }
