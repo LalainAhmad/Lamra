@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.lamra.smd.la2mra", appContext.getPackageName());
+        assertEquals("com.lamra.smd.lamra", appContext.getPackageName());
     }
 }
