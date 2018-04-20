@@ -6,5 +6,4 @@ package com.lamra.smd.lamra;
 
 public class User {
     int id;
-    
 }
