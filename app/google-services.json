@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "721132354351",
+    "firebase_url": "https://lamra-63fff.firebaseio.com",
+    "project_id": "lamra-63fff",
+    "storage_bucket": "lamra-63fff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721132354351:android:06b6b7da60e574b1",
+        "android_client_info": {
+          "package_name": "com.lamra.smd.lamra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "721132354351-ma6jd1flvrma06guca1d0scuti8hjcmo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lamra.smd.lamra",
+            "certificate_hash": "ce6d7bdc806ea9e505bae661a693b979ef2fa82b"
+          }
+        },
+        {
+          "client_id": "721132354351-33raolsu7vcsvrspc255pcukhn6qa4tr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lamra.smd.lamra",
+            "certificate_hash": "9d0695d269a5debe167e83f3adec9c263931cb72"
+          }
+        },
+        {
+          "client_id": "721132354351-i28b0m0lm0cc3ddpv9vi9r196vhdj7oh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGq4O55mmkN_uRnhyewLG8RgmseAH3VIE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "721132354351-i28b0m0lm0cc3ddpv9vi9r196vhdj7oh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
