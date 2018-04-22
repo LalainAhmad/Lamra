@@ -25,10 +25,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +41,38 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, OnClickListener, View.OnKeyListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
 
-    protected void login(View v) {
-        Intent i = new Intent(this, NewsFeed.class);
-        startActivity(i);
+    ImageView logo;
+    LinearLayout linearlayout1;
+
+    @Override
+    public void onClick(View view) {
+
+        if(view.getId() == R.id.logo || view.getId() == R.id.linearlayout1)
+        {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        }
     }
 
+    @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+
+
+        if (i==KeyEvent.KEYCODE_ENTER && keyEvent.getAction()==KeyEvent.ACTION_DOWN)
+            login(view);
+        return false;
+    }
+    public void login(View v) {
+        Intent i = new Intent(this, PhotoImport.class);
+        startActivity(i);
+    }
 //    public void login(View view)
 //    {
 //
@@ -79,6 +103,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        logo=(ImageView) findViewById(R.id.logo);
+        linearlayout1=(LinearLayout) findViewById(R.id.linearlayout1);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -96,6 +125,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+
+        mEmailView.setOnKeyListener(this);
+        mPasswordView.setOnKeyListener(this);
+//        logo.setOnClickListener(this);
+  //      linearlayout1.setOnClickListener(this);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
 //        mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -126,7 +160,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                    .setAction(android.R.string.ok, new OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
@@ -283,6 +317,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
 
     }
+
+
+
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {

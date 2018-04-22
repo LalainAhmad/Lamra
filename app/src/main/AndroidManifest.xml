@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +27,14 @@
         <activity
             android:name=".NewsFeed"
             android:label="@string/title_activity_news_feed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomePage"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PhotoImport"
+            android:label="@string/title_activity_photo_import"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
