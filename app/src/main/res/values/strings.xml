@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Lamra</string>
 
+    // https://lamra-63fff.firebaseapp.com/__/auth/handler
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -18,4 +20,17 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_home_page">Home Page</string>
     <string name="title_activity_photo_import">Photo Import</string>
+    <string name="title_activity_home">home</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_screen_home">Screen Home</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">YOUR_APP_ID</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fbYOUR_APP_ID</string>
+    <!-- Twitter consumer key and secret -->
+    <string name="twitter_consumer_key" translatable="false">YOUR_CONSUMER_KEY</string>
+    <string name="twitter_consumer_secret" translatable="false">YOUR_CONSUMER_SECRET</string>
+
 </resources>

@@ -1,4 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearlayout1"
@@ -15,25 +20,27 @@
     tools:context="com.lamra.smd.lamra.LoginActivity">
 
     <!-- Login progress -->
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="248dp"
         android:layout_height="149dp"
         android:layout_marginTop="20dp"
+        android:onClick="onClick"
         app:srcCompat="@drawable/lamra" />
 
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="150dp">
 
         <LinearLayout
@@ -41,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
+            android:onClick="onClick"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -90,3 +98,4 @@
     </ScrollView>
 
 </LinearLayout>
+</ScrollView>
