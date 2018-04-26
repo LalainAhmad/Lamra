@@ -21,6 +21,7 @@ import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.ProviderQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,9 +33,10 @@ import com.lamra.smd.lamra.java.UserDao;
 
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
-//   mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
     private EditText Email1;
     private EditText Password;
     private View mProgressView;
@@ -69,23 +71,23 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         if (i == R.id.signup2) {
             final FirebaseUser user = mAuth.getCurrentUser();
-            if(!user.isEmailVerified())
-                sendEmailVerification();
-            else
+            user.reload();
+
+
             createAccount(Email1.getText().toString(), Password.getText().toString());
+            if (!user.isEmailVerified())
+                sendEmailVerification();
+
+
         }
     }
 
-   // @Override
- //   public void onClick(View v) {
-
-
-//          Toast.makeText(c,"signupbuttoncalled",Toast.LENGTH_SHORT).show();
-//  //        if(Email1.getText()!=null)
-//        Toast.makeText(c,Email1.getText().toString(),Toast.LENGTH_SHORT).show();
-//            createAccount(Email1.getText().toString(), Password.getText().toString());
-//        }
-
+    protected Boolean checkForFirstTime(String userId) {
+        mDatabase.child("users").child(userId).once("value", function(snapshot) {
+            var exists = (snapshot.val() != = null);
+           return true;
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -98,6 +100,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         mStatusTextView=(TextView) findViewById(R.id.textview2);
         mProgressView = findViewById(R.id.progressbar);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase=FirebaseDatabase.getInstance().getReference();
         findViewById(R.id.signup2).setOnClickListener(this);
 
     }
@@ -134,31 +137,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
     private void sendEmailVerification() {
-       // Disable button
-
         findViewById(R.id.signup2).setEnabled(false);
-
-        // Send verification email
-
-        // [START send_email_verification]
-
         final FirebaseUser user = mAuth.getCurrentUser();
-
-        user.sendEmailVerification()
-
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+        user.sendEmailVerification().addOnCompleteListener(this, new OnCompleteListener<Void>() {
 
                     @Override
 
                     public void onComplete(@NonNull Task<Void> task) {
-
-                        // [START_EXCLUDE]
-
-                        // Re-enable button
-
                         findViewById(R.id.signup2).setEnabled(true);
-
-
 
                         if (task.isSuccessful()) {
 
