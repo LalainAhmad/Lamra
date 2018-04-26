@@ -134,8 +134,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
     private void sendEmailVerification() {
-
-        // Disable button
+       // Disable button
 
         findViewById(R.id.signup2).setEnabled(false);
 
