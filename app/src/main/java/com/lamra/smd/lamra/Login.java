@@ -185,45 +185,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         return password.length() > 4;
     }
 
-//    protected void updateUI(FirebaseUser x)
-//    {
-//        Intent i = new Intent(this,ScreenHome.class);
-//        i.putExtra("user",x);
-//    }
-
-
-//    public void onStart(final String email, String password) {
-//        super.onStart();
-//
-//        Log.d(TAG, "createAccount:" + email);
-//        if (!validateForm()) {
-//            return;
-//        }
-//        showProgressDialog();
-//
-//        mAuth.signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "signInWithEmail:success");
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-//                            Toast.makeText(Login.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
-//                        }
-//
-//                        // ...
-//                    }
-//                });
-//    }
-
-    @Override
+   @Override
     public void onClick(View view) {
         int i = view.getId();
 
@@ -248,7 +210,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
 //        if (i == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
 //        }
-//        return false;
+       return false;
+
     }
 
     public void login(View v) {
@@ -314,7 +277,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         if (user != null) {
 
             if(!user.isEmailVerified())
-                mStatusTextView.setText("Click on the verification sent to " + user.getEmail() + " to Proceed");
+                Toast.makeText(this, "Click on the verification sent to " + user.getEmail() + " to Proceed", Toast.LENGTH_SHORT).show();
+//                mStatusTextView.setText("Click on the verification sent to " + user.getEmail() + " to Proceed");
 
             else if(user.isEmailVerified())
             {
