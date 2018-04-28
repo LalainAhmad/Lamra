@@ -34,15 +34,25 @@
             android:name=".ScreenHome"
             android:label="@string/title_activity_screen_home" />
         <activity android:name=".Login">
-
-        </activity>
-        <activity android:name=".java.SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".java.SignUp">
+
+            <!-- <intent-filter> -->
+            <!-- &lt;!&ndash;<action android:name="android.intent.action.MAIN" />&ndash;&gt; -->
+
+
+            <!-- &lt;!&ndash;<category android:name="android.intent.category.LAUNCHER" />&ndash;&gt; -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".java.FirebaseUI"
+            android:label="@string/title_activity_firebase_ui"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

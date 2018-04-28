@@ -53,6 +53,16 @@
             android:inputType="textPassword" />
 
         <Button
+            android:id="@+id/loginthen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/com_facebook_button_background"
+            android:onClick="onClickLogIn"
+            android:text="LOGIN"
+            android:visibility="invisible" />
+
+        <Button
             android:id="@+id/signup2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
