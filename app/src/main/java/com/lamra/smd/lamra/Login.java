@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,12 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lamra.smd.lamra.java.SignUp;
 
-
-
-
 import java.util.Collections;
-public class Login extends AppCompatActivity implements View.OnClickListener, View.OnKeyListener {
 
+public class Login extends AppCompatActivity implements View.OnClickListener, View.OnKeyListener {
 
     ImageView logo;
     LinearLayout linearlayout1;
@@ -55,7 +51,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-
         mAuth = FirebaseAuth.getInstance();
         logo = (ImageView) findViewById(R.id.logo);
         linearlayout1 = (LinearLayout) findViewById(R.id.linearlayout1);
@@ -64,8 +59,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         Email1.setOnKeyListener(this);
         Password.setOnKeyListener(this);
         Button Login = (Button) findViewById(R.id.Login);
+        Login.setOnClickListener(this);
         Button signUp = (Button) findViewById(R.id.signup);
-        mDetailTextView = (TextView) findViewById(R.id.textView1);
+        signUp.setOnClickListener(this);
+       // mDetailTextView = (TextView) findViewById(R.id.textView1);
         mStatusTextView = (TextView) findViewById(R.id.textView2);
         mProgressView = findViewById(R.id.progressbar);
         //       providers = new ArrayList<>();
@@ -228,15 +225,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
 
     @Override
     public void onClick(View view) {
+        int i = view.getId();
 
-        if (view.getId() == R.id.logo || view.getId() == R.id.linearlayout1) {
+        if (i == R.id.logo || i == R.id.linearlayout1) {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
-        int i = view.getId();
-
         if(i==R.id.Login)
-            Toast.makeText(this, " SIGINIG INNN ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, " SIGNING INNN ", Toast.LENGTH_SHORT).show();
             signIn(Email1.getText().toString(), Password.getText().toString());
 
         if(i==R.id.signup)
@@ -250,14 +246,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
 
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
-        if (i == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-            signUp(view);
-        }
-        return false;
+//        if (i == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+//        }
+//        return false;
     }
 
     public void login(View v) {
         Intent i = new Intent(this, ScreenHome.class);
+
         startActivity(i);
     }
 
@@ -289,19 +285,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(Login.this, "AAOO JEE", Toast.LENGTH_SHORT).show();
+               //             Toast.makeText(Login.this, "AAOO JEE", Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(Login.this, "Authentication failed.",
+
+                            Toast.makeText(Login.this, " Authentication failed. ",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
                         // [START_EXCLUDE]
                         if (!task.isSuccessful()) {
+                            Toast.makeText(Login.this, " User Does Not Exist. ",Toast.LENGTH_SHORT).show();
                             mStatusTextView.setText("FAILED");
                         }
                         hideProgressDialog();
@@ -314,21 +312,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
-            mStatusTextView.setText("HOGYAAA " + user.getEmail() + user.isEmailVerified());
 
-            mDetailTextView.setText("HOGYAAA hoga " + user.getEmail() + user.isEmailVerified());
+            if(!user.isEmailVerified())
+                mStatusTextView.setText("Click on the verification sent to " + user.getEmail() + " to Proceed");
 
-
-
-    //        findViewById(R.id.email_password_buttons).setVisibility(View.GONE);
-
-//            findViewById(R.id.email_password_fields).setVisibility(View.GONE);
-
-     //       findViewById(R.id.signed_in_buttons).setVisibility(View.VISIBLE);
-
-
-
-      //      findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
+            else if(user.isEmailVerified())
+            {
+                showProgressDialog();
+                Intent i = new Intent(this, ScreenHome.class);
+                startActivity(i);
+            }
 
         } else {
 
@@ -336,66 +329,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
 
             mDetailTextView.setText(null);
 
-
-
             findViewById(R.id.Login).setVisibility(View.VISIBLE);
 
             findViewById(R.id.signup).setVisibility(View.VISIBLE);
 
 //            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
-
         }
-
     }
-
-//
-//    private void updateUI(FirebaseUser user) {
-//        hideProgressDialog();
-//        if (user != null) {
-//            //           user.reload();
-////            if(!user.isEmailVerified())
-////            {
-////                sendEmailVerification();
-////            }
-////            else {
-//
-//
-//            mStatusTextView.setText("Sign in hogya " + user.getEmail() + user.isEmailVerified());
-//            mDetailTextView.setText(user.getUid());
-//            Email1.setVisibility(View.GONE);
-//            Password.setVisibility(View.GONE);
-//            findViewById(R.id.signup2).setVisibility(View.INVISIBLE);
-//
-////                if(user.isEmailVerified())
-//            //              {
-//            //      LOGIN2.setVisibility(View.VISIBLE);
-//            login();
-//            //            }
-//            //               LOGIN2.setOnClickListener(this);
-//
-//            //}
-//        } else {
-//
-//            mStatusTextView.setText("NAHIN HORAHA SIGN INNN KOI MASLA HAI " + user.getEmail() + user.isEmailVerified());
-//            //        mStatusTextView.setText(R.string.signed_out);
-//
-//            mDetailTextView.setText(null);
-////
-////
-//            //           findViewById(R.id.signup2).setVisibility(View.VISIBLE);
-//
-//
-//            //
-//
-////           Intent i = new Intent(this,ScreenHome.class);
-//            //          i.putExtra("user",user);
-////
-////            findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
-////
-////            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
-//
-//        }
-//    }
-
 }
 

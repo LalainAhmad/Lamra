@@ -175,6 +175,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             //        mStatusTextView.setText(R.string.signed_out);
 
             mDetailTextView.setText(null);
+
         }
     }
     public void login() {
