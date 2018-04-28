@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,10 +20,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.lamra.smd.lamra.java.SignUp;
-
-import java.net.PasswordAuthentication;
 
 public class Login extends AppCompatActivity implements View.OnClickListener, View.OnKeyListener {
 
@@ -185,7 +180,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
     }
 
     public void login(View v) {
-        Intent i = new Intent(this, ScreenHome.class);
+        Intent i = new Intent(this, Feed.class);
         startActivity(i);
     }
 
