@@ -76,38 +76,19 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     @Override
     public  void onClick(View v)
     {
-
-
-
-//
-//        int i = v.getId();
-//
-//        if (i == R.id.signup2) {
-           final FirebaseUser user = mAuth.getCurrentUser();
-//
-//
-//            if (Email1.getText().toString()==mAuth.getCurrentUser().getEmail())
-//                Toast.makeText(c, "Email id already exists ", Toast.LENGTH_SHORT).show();
-//            else
-                sendEmailVerification();
-                    if(user.isEmailVerified())
-    createAccount(Email1.getText().toString(), Password.getText().toString());
-
-
-
-
+        final FirebaseUser user = mAuth.getCurrentUser();
+        int i = v.getId();
+        if (i == R.id.signup2) {
+            createAccount(Email1.getText().toString(), Password.getText().toString());
+       }
+       if(i==R.id.loginthen)
+       {
+           if(user.isEmailVerified())
+           {
+               login();
+           }
+       }
     }
-    public void onClicksignUP(View v) {
-
-
-    }
-
-//    protected Boolean checkForFirstTime(String userId) {
-//        mDatabase.child("users").child(userId).once("value", function(snapshot) {
-//            var exists = (snapshot.val() != = null);
-//           return true;
-//        });
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,99 +106,36 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         //       providers = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         findViewById(R.id.signup2).setOnClickListener(this);
-
         LOGIN2.setOnClickListener(this);
-
-        //      findViewById((R.id.loginthen).setOnClickListener(this);
-
-
     }
-    //   Write a message to the database
-
-//
-//User user = new User();
-//        user.setPhoneNo("03005462344");
-//        user.setEmail("mahnoor@gmail.com");
-//        user.setName("Mahnoor Khan");
-//        user.setUsername("mano123");
-//        user.setProfilePic("abc");
-//
-//
-//        mDatabase.child("users").child("555").setValue(user);
-//
-//        mDatabase.child("users").child("567").setValue(user);
-//
-//        mDatabase.child("users").child("567").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                User u = dataSnapshot.getValue(User.class);
-//                Toast.makeText(SignUp.this, "User's email:" + u.getEmail(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
 
     private void sendEmailVerification() {
         findViewById(R.id.signup2).setEnabled(false);
         final FirebaseUser user = mAuth.getCurrentUser();
         user.sendEmailVerification().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-
             @Override
-
             public void onComplete(@NonNull Task<Void> task) {
                 findViewById(R.id.signup2).setEnabled(true);
-
                 if (task.isSuccessful()) {
-
                     Toast.makeText(SignUp.this,
-
                             "Verification email sent to " + user.getEmail(),
-
                             Toast.LENGTH_SHORT).show();
-
                 } else {
                     Log.e(TAG, "sendEmailVerification", task.getException());
                     Toast.makeText(SignUp.this, "Failed to send verification email.",
                             Toast.LENGTH_SHORT).show();
-
                 }
-
                 // [END_EXCLUDE]
-
             }
-
         });
-
-        // [END send_email_verification]
-
+       // [END send_email_verification]
     }
-//
-//    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//if (user != null) {
-//        // Name, email address, and profile photo Url
-//        String name = user.getDisplayName();
-//        String email = user.getEmail();
-//        Uri photoUrl = user.getPhotoUrl();
-//
-//        // Check if user's email is verified
-//        boolean emailVerified = user.isEmailVerified();
-//
-//        // The user's ID, unique to the Firebase project. Do NOT use this value to
-//        // authenticate with your backend server, if you have one. Use
-//        // FirebaseUser.getToken() instead.
-//        String uid = user.getUid();
-//    }
 
 
     private boolean validateForm() {
         boolean valid = true;
         String email = Email1.getText().toString();
+
         if (TextUtils.isEmpty(email)) {
             Email1.setError("Required.");
             valid = false;
@@ -246,53 +164,21 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
- //           user.reload();
-//            if(!user.isEmailVerified())
-//            {
-//                sendEmailVerification();
-//            }
-//            else {
-
 
                 mStatusTextView.setText("HOGYAAA " + user.getEmail() + user.isEmailVerified());
                 mDetailTextView.setText(user.getUid());
-                Email1.setVisibility(View.GONE);
-                Password.setVisibility(View.GONE);
-                findViewById(R.id.signup2).setVisibility(View.INVISIBLE);
+                login();
 
-//                if(user.isEmailVerified())
-  //              {
-                    LOGIN2.setVisibility(View.VISIBLE);
-                    login();
-    //            }
- //               LOGIN2.setOnClickListener(this);
-
-            //}
         } else {
 
             mStatusTextView.setText("NAHIN HOTA " + user.getEmail() + user.isEmailVerified());
             //        mStatusTextView.setText(R.string.signed_out);
 
             mDetailTextView.setText(null);
-//
-//
- //           findViewById(R.id.signup2).setVisibility(View.VISIBLE);
-
-
-
- //
-
-//           Intent i = new Intent(this,ScreenHome.class);
-  //          i.putExtra("user",user);
-//
-//            findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
-//
-//            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
-
         }
     }
     public void login() {
-        Intent i = new Intent(this, ScreenHome.class);
+        Intent i = new Intent(this, Login.class);
         startActivity(i);
     }
 
@@ -411,6 +297,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(c, "createUserWithEmail1:success", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                sendEmailVerification();
+
                                 //                           if (user.isEmailVerified()) {
                                 updateUI(user);
                                 //                         } else {

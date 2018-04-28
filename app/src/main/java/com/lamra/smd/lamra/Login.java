@@ -71,7 +71,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         //       providers = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mProgressView = findViewById(R.id.login_progress);
-
         Password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
