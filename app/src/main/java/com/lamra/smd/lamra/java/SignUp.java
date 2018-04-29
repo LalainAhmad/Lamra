@@ -69,26 +69,43 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public void setPassword(EditText password) {
         Password = password;
     }
-    public void onClickLogIn(View v) {
-        login();
-    }
+    public int flag=0;
+
 
     @Override
     public  void onClick(View v)
     {
         final FirebaseUser user = mAuth.getCurrentUser();
         int i = v.getId();
+        Intent intent= new Intent();
         if (i == R.id.signup2) {
+ //           flag=0;
             createAccount(Email1.getText().toString(), Password.getText().toString());
-       }
-       if(i==R.id.loginthen)
-       {
-           if(user.isEmailVerified())
-           {
-               login();
-           }
-       }
-    }
+        }
+        if(i==R.id.loginthen)
+        {
+            if(user.isEmailVerified())
+            {
+                login();
+            }
+        }
+//        if(i==R.id.signup1)
+//        {
+//            flag=1;
+//            login();
+//            intent.putExtra("Email",user.getEmail());
+//            intent.putExtra("username",user.getPhoneNumber());
+//
+////            intent.putExtra("FullName", user.getfullname());
+////            intent.putExtra("Password",user.getPassword());
+////
+////            createAccount(Email1.getText().toString(), Password.getText().toString());
+////            if(user.isEmailVerified()){
+// //               verify();
+//  //          }
+//
+//        }
+        }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +117,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         Email1 = (EditText) findViewById(R.id.emailID);
         Password = (EditText) findViewById(R.id.pw);
         LOGIN2 = (Button) findViewById(R.id.loginthen);
+        LOGIN2.setOnClickListener(this);
         mDetailTextView = (TextView) findViewById(R.id.textview1);
         mStatusTextView = (TextView) findViewById(R.id.textview2);
         mProgressView = findViewById(R.id.progressbar);
         //       providers = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         findViewById(R.id.signup2).setOnClickListener(this);
-        LOGIN2.setOnClickListener(this);
+        findViewById(R.id.signup1).setOnClickListener(this);
+        hideProgressDialog();
     }
 
     private void sendEmailVerification() {
@@ -164,25 +183,37 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
+            mStatusTextView.setText("HOGYAAA " + user.getEmail() + user.isEmailVerified());
 
-                mStatusTextView.setText("HOGYAAA " + user.getEmail() + user.isEmailVerified());
-                mDetailTextView.setText(user.getUid());
-                login();
+            mDetailTextView.setText(user.getUid());
+           login();
+
 
         } else {
 
+            stayonsignup();
             mStatusTextView.setText("NAHIN HOTA " + user.getEmail() + user.isEmailVerified());
             //        mStatusTextView.setText(R.string.signed_out);
-
             mDetailTextView.setText(null);
 
         }
     }
     public void login() {
-        Intent i = new Intent(this, Login.class);
-        startActivity(i);
+
+            Intent i = new Intent(this, Login.class);
+            startActivity(i);
+
     }
 
+//    public void verify(){
+//        Intent i = new Intent(this, PhoneVerification.class);
+//        startActivity(i);
+//    }
+
+    public void stayonsignup(){
+        Intent i = new Intent(this, SignUp.class);
+        startActivity(i);
+    }
 
 //    public int checkFirebaseForUsername(String email123) {
 //        final int[] flag = {0};

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="-25dp"
-    android:minHeight="127dp"
-    tools:context="com.lamra.smd.lamra.Login">
+    android:layout_marginTop="-10dp"
+    android:background="@color/colorPrimary"
+    android:minHeight="127dp">
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:background="@android:drawable/edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +32,7 @@
                 android:layout_height="193dp"
                 android:layout_marginTop="40dp"
                 android:onClick="onClick"
-                app:srcCompat="@drawable/lamra" />
+                app:srcCompat="@drawable/lamra1" />
 
             <ProgressBar
                 android:id="@+id/login_progress"
@@ -44,7 +45,7 @@
                 android:id="@+id/Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
@@ -53,7 +54,7 @@
                 android:id="@+id/Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword" />
@@ -62,26 +63,27 @@
                 android:id="@+id/Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="LOG IN" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="175dp"
                 android:layout_marginTop="10dp"
-                android:text="OR"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="@color/colorPrimaryDark" />
+                android:background="@color/tw__light_gray"
+                android:text="LOG IN" />
 
             <Button
                 android:id="@+id/signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/com_facebook_button_background_color_selected"
                 android:onClick="onClick"
-                android:text="SIGN UP" />
+                android:text="SIGN UP VIA EMAIL" />
+
+            <Button
+                android:id="@+id/signup3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="onClick"
+                android:text="SIGN UP VIA PHONE"
+                android:visibility="visible" />
         </LinearLayout>
 
 

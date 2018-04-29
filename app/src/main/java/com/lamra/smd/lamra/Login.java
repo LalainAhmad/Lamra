@@ -29,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lamra.smd.lamra.java.Phone2;
+import com.lamra.smd.lamra.java.PhoneVerification;
 import com.lamra.smd.lamra.java.SignUp;
 
 import java.util.Collections;
@@ -62,7 +64,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         Login.setOnClickListener(this);
         Button signUp = (Button) findViewById(R.id.signup);
         signUp.setOnClickListener(this);
-       // mDetailTextView = (TextView) findViewById(R.id.textView1);
+        findViewById(R.id.signup3).setOnClickListener(this);
+        // mDetailTextView = (TextView) findViewById(R.id.textView1);
         mStatusTextView = (TextView) findViewById(R.id.textView2);
         mProgressView = findViewById(R.id.progressbar);
         //       providers = new ArrayList<>();
@@ -199,6 +202,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
 
         if(i==R.id.signup)
             signUp(view);
+        if(i==R.id.signup3) {
+            Intent intent = new Intent(this, PhoneVerification.class);
+            startActivity(intent);
+        }
     }
 
     public void onLogin(View view)
@@ -214,14 +221,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
 
     }
 
-    public void login(View v) {
-        Intent i = new Intent(this, ScreenHome.class);
-
+    public void phonecheck(View v)
+    {
+        Intent i=new Intent(this, PhoneVerification.class);
         startActivity(i);
     }
-
+    public void login(View v) {
+        Intent i = new Intent(this, PhoneVerification.class);
+        startActivity(i);
+    }
     public void signUp(View v) {
-        Intent i = new Intent(this, SignUp.class);
+        Intent i = new Intent(this,SignUp.class);
         startActivity(i);
     }
 
@@ -290,13 +300,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         } else {
 
             mStatusTextView.setText("signed out ");
-
             mDetailTextView.setText(null);
-
             findViewById(R.id.Login).setVisibility(View.VISIBLE);
-
             findViewById(R.id.signup).setVisibility(View.VISIBLE);
-
 //            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
         }
     }

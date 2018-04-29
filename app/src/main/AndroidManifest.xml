@@ -27,7 +27,6 @@
         <!-- </intent-filter> -->
         <!-- </activity> -->
         <activity
-
             android:name=".PhotoImport"
             android:label="@string/title_activity_photo_import"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -40,7 +39,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".java.SignUp">
 
@@ -54,7 +52,23 @@
         <activity
             android:name=".java.FirebaseUI"
             android:label="@string/title_activity_firebase_ui"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".java.PhoneVerification"
+            android:label="@string/title_activity_phone_verification"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity
+            android:name=".java.Phone2"
+            android:label="@string/title_activity_phone2"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
     </application>
 
 </manifest>

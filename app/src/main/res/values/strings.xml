@@ -33,5 +33,7 @@
     <string name="twitter_consumer_key" translatable="false">YOUR_CONSUMER_KEY</string>
     <string name="twitter_consumer_secret" translatable="false">YOUR_CONSUMER_SECRET</string>
     <string name="title_activity_firebase_ui">FirebaseUI</string>
+    <string name="title_activity_phone_verification">Phone Verification</string>
+    <string name="title_activity_phone2">Phone2</string>
 
 </resources>
