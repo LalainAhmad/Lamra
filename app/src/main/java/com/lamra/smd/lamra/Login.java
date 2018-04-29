@@ -3,8 +3,10 @@ package com.lamra.smd.lamra;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,7 +19,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -31,23 +37,25 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
     private EditText Password;
     private View mProgressView;
     private View mLoginFormView;
+    private Context c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login2);
+        setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-
+        c=this;
         logo=(ImageView) findViewById(R.id.logo);
         linearlayout1=(LinearLayout) findViewById(R.id.linearlayout1);
-        Email=(EditText) findViewById(R.id.Email);
-        Password=(EditText) findViewById(R.id.Password);
+        Email=(EditText) findViewById(R.id.email);
+        Password=(EditText) findViewById(R.id.password);
         Email.setOnKeyListener(this);
         Password.setOnKeyListener(this);
-        Button Login = (Button) findViewById(R.id.Login);
+        Button Log = (Button) findViewById(R.id.emailLogin);
         Button signUp = (Button) findViewById(R.id.signup);
-        mProgressView = findViewById(R.id.login_progress);
+        Log.setOnClickListener(this);
+        signUp.setOnClickListener(this);
 
         Password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -147,29 +155,29 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         return password.length()>4;
     }
 
-    protected void updateUI(FirebaseUser x)
-    {
-        Intent i = new Intent(this,ScreenHome.class);
-        i.putExtra("user",x);
-    }
+//    protected void updateUI(FirebaseUser x)
+//    {
+//        Intent i = new Intent(this,ScreenHome.class);
+//        i.putExtra("user",x);
+//    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        updateUI(currentUser);
+//    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        if(view.getId() == R.id.logo || view.getId() == R.id.linearlayout1)
-        {
-            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-        }
-    }
+//    @Override
+//    public void onClick(View view) {
+//
+//        if(view.getId() == R.id.logo || view.getId() == R.id.linearlayout1)
+//        {
+//            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+//        }
+//    }
 
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -179,9 +187,41 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
         return false;
     }
 
+    public void onClick(View v) {
+
+        int i = v.getId();
+        if (i == R.id.emailLogin) {
+            mAuth.signInWithEmailAndPassword(Email.getText().toString(), Password.getText().toString())
+
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                if(mAuth.getCurrentUser().isEmailVerified()) {
+                                    Toast.makeText(c, "Login Success", Toast.LENGTH_SHORT).show();
+                                    Intent in = new Intent(c, Feed.class);
+                                    startActivity(in);
+                                }
+                                else
+                                    Toast.makeText(c, "Verify your email", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(c, "Login Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    });
+        }
+        else if(i==R.id.signup)
+        {
+            Intent in = new Intent(c, SignUp.class);
+            startActivity(in);
+        }
+        }
+
     public void login(View v) {
-        Intent i = new Intent(this, Feed.class);
-        startActivity(i);
+
+
     }
 
     public void signUp(View v) {

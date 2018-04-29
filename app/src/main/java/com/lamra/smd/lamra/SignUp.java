@@ -27,10 +27,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private EditText Email1;
     private EditText Password;
-    private View mProgressView;
+    private EditText Bio;
+    private EditText Name;
+    private EditText userame;
+    private EditText PhoneNo;
+
     private static final String TAG = "EmailPassword";
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
     private Context c;
     private Button button;
 
@@ -79,11 +81,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         c=this;
+
         Email1=(EditText) findViewById(R.id.emailID);
         Password=(EditText) findViewById(R.id.pw);
-        mDetailTextView=(TextView) findViewById(R.id.textview1);
-        mStatusTextView=(TextView) findViewById(R.id.textview2);
-        mProgressView = findViewById(R.id.progressbar);
+        Bio=(EditText) findViewById(R.id.bio);
+        Name=(EditText) findViewById(R.id.fullname);
+        userame=(EditText) findViewById(R.id.username);
+        PhoneNo=(EditText) findViewById(R.id.phoneNo);
+
+
+
         findViewById(R.id.signup2).setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -113,7 +120,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                         if (task.isSuccessful()) {
 
-                            Toast.makeText(SignUp.this,
+                            Toast.makeText(c,
 
                                     "Verification email sent to " + user.getEmail(),
 
@@ -121,9 +128,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                         } else {
 
-                            Log.e(TAG, "sendEmailVerification", task.getException());
-
-                            Toast.makeText(SignUp.this,
+                            Toast.makeText(c,
 
                                     "Failed to send verification email.",
 
@@ -162,20 +167,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         return valid;
     }
 
-    private void hideProgressDialog()
-    {
-        mProgressView.setVisibility(View.INVISIBLE);
-    }
-    private void showProgressDialog()
-    {
-        mProgressView.setVisibility(View.VISIBLE);
-    }
-
-    public void createAccount(String email, String password) {
+    public void createAccount(String email, final String password) {
             if (!validateForm()) {
                 return;
             }
-            showProgressDialog();
+
             // [START create_user_with_email]
 
             mAuth.createUserWithEmailAndPassword(email, password)
@@ -186,10 +182,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if (task.isSuccessful()) {
-                                Toast.makeText(c, "createUserWithEmail1:success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(c, "createUserWith "+Email1.getText().toString()+" :success", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 user.sendEmailVerification();
                                 UserF u = new UserF();
+                                u.setUid(user.getUid());
+                                u.setName(Name.getText().toString());
+                                u.setUsername(userame.getText().toString());
+                                u.setEmail(Email1.getText().toString());
+                                u.setPassword(Password.getText().toString());
+                                u.setBio(Bio.getText().toString());
+                                u.setPhoneNo(PhoneNo.getText().toString());
+
                                 mDatabase.child("users").child(user.getUid()).setValue(u);
 
                             } else {
@@ -202,7 +206,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                             // [START_EXCLUDE]
 
-                            hideProgressDialog();
+
 
                             // [END_EXCLUDE]
 

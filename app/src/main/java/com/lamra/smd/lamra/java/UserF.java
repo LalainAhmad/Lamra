@@ -11,13 +11,14 @@ import java.util.HashMap;
  */
 
 public class UserF {
-    private int Uid;
+    private String Uid;
     private String username;
     private String Name;
     private String Bio;
     private String Email;
     private String phoneNo;
     private String ProfilePic;
+    private String password;
     private ArrayList<Post> posts;
     private ArrayList<String> Followers;
     private ArrayList<String> Following;
@@ -27,11 +28,19 @@ public class UserF {
     public UserF() {
     }
 
-    public int getUid() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUid() {
         return Uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         Uid = uid;
     }
 
