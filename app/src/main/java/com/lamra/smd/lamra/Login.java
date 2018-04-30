@@ -21,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -47,12 +51,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Vi
     private TextView mDetailTextView;
     private TextView mStatusTextView;
     DatabaseReference mDatabase;
+    AdView mAdView;
     private static final String TAG = "EmailPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+        MobileAds.initialize(this, "ca-app-pub-5624382671696247~5130820914");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         mAuth = FirebaseAuth.getInstance();
         logo = (ImageView) findViewById(R.id.logo);
         linearlayout1 = (LinearLayout) findViewById(R.id.linearlayout1);

@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -36,7 +37,7 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-messaging:15.0.0' //   Cloud Messaging and Notifications
 //    implementation 'com.google.firebase:firebase-config:10.2.1' //  Remote Config
 //    implementation 'com.google.firebase:firebase-invites:10.2.1' // Invites and Dynamic Links
-//    implementation 'com.google.firebase:firebase-ads:10.2.1' // AdMob
+    implementation 'com.google.firebase:firebase-ads:15.0.0' // AdMob
 //    implementation 'com.google.firebase:firebase-appindexing:10.2.1' // App Indexing
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
