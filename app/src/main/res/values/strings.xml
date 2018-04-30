@@ -16,6 +16,7 @@
         completions."
     </string>
     <string name="title_activity_news_feed">NewsFeed</string>
+    <string name="web_client_id">988550212959-33rimvlj8v2ph3k61tb8crii+8lbom7f58.apps.googleusercontent.com</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_home_page">Home Page</string>
