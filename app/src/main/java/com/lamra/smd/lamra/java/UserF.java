@@ -3,6 +3,7 @@ package com.lamra.smd.lamra.java;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,38 +11,54 @@ import java.util.HashMap;
  * Created by NimraArif on 4/27/2018.
  */
 
-public class UserF {
-    private String Uid;
+public class UserF implements Serializable {
+    private String uid;
     private String username;
-    private String Name;
-    private String Bio;
-    private String Email;
+    private String name;
+    private String bio;
+    private String email;
     private String phoneNo;
-    private String ProfilePic;
+    private String profilepic;
     private String password;
     private ArrayList<Post> posts;
-    private ArrayList<String> Followers;
-    private ArrayList<String> Following;
+    private ArrayList<String> followers;
+    private ArrayList<String> following;
 
+    public UserF(String uid, String username, String name, String bio, String email, String phoneNo, String profilePic, String password, ArrayList<Post> posts, ArrayList<String> followers, ArrayList<String> following) {
+        this.uid = uid;
+        this.username = username;
+        this.name = name;
+        this.bio = bio;
+        this.email = email;
+        this.phoneNo = phoneNo;
+        profilepic = profilePic;
+        this.password = password;
+        this.posts = posts;
+        this.followers = followers;
+        this.following = following;
+    }
 
+    public UserF(String username, String name, String bio, String email, String phoneNo, String password) {
+        this.uid = uid;
+        this.username = username;
+        this.name = name;
+        this.bio = bio;
+        this.email = email;
+        this.phoneNo = phoneNo;
+        this.password = password;
+        this.posts = posts;
+    }
 
     public UserF() {
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getUid() {
-        return Uid;
+        return uid;
     }
 
     public void setUid(String uid) {
-        Uid = uid;
+        this.uid = uid;
     }
 
     public String getUsername() {
@@ -53,27 +70,27 @@ public class UserF {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getBio() {
-        return Bio;
+        return bio;
     }
 
     public void setBio(String bio) {
-        Bio = bio;
+        this.bio = bio;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getPhoneNo() {
@@ -84,12 +101,20 @@ public class UserF {
         this.phoneNo = phoneNo;
     }
 
-    public String getProfilePic() {
-        return ProfilePic;
+    public String getProfilepic() {
+        return profilepic;
     }
 
-    public void setProfilePic(String profilePic) {
-        ProfilePic = profilePic;
+    public void setProfilepic(String profilepic) {
+        this.profilepic = profilepic;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public ArrayList<Post> getPosts() {
@@ -101,18 +126,18 @@ public class UserF {
     }
 
     public ArrayList<String> getFollowers() {
-        return Followers;
+        return followers;
     }
 
     public void setFollowers(ArrayList<String> followers) {
-        Followers = followers;
+        this.followers = followers;
     }
 
     public ArrayList<String> getFollowing() {
-        return Following;
+        return following;
     }
 
     public void setFollowing(ArrayList<String> following) {
-        Following = following;
+        this.following = following;
     }
 }

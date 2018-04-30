@@ -1,13 +1,21 @@
 package com.lamra.smd.lamra.java;
 
+import java.io.Serializable;
+
 /**
  * Created by NimraArif on 4/27/2018.
  */
 
-public class Comment {
+public class Comment implements Serializable {
     private String Cid;
     private String Uid;
     private String description;
+
+    public Comment(String cid, String uid, String description) {
+        Cid = cid;
+        Uid = uid;
+        this.description = description;
+    }
 
     public Comment() {
     }

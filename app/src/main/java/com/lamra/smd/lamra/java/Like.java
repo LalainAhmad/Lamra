@@ -1,12 +1,22 @@
 package com.lamra.smd.lamra.java;
 
+import java.io.Serializable;
+
 /**
  * Created by NimraArif on 4/27/2018.
  */
 
-public class Like {
+public class Like implements Serializable {
     private String Uid;
     private String name;
+
+    public Like() {
+    }
+
+    public Like(String uid, String name) {
+        Uid = uid;
+        this.name = name;
+    }
 
     public String getUid() {
         return Uid;
